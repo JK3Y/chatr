@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chatr</title>
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div class="container">
+
+    <div class="jumbotron text-center" id="namewindow">
+        <h1 class="display-3">chatr</h1>
+        <p class="lead">quick. disposable. chat.<br />enter a name for your chatroom</p>
+
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <input type="text" autocomplete="off" placeholder="room name" id="roomName" class="form-control" autofocus><br />
+                <button class="btn btn-success btn-lg" id="btnCreate">Create!</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#roomName').focus();
+
+        $('#roomName').keyup(function(event) {
+            if (event.keyCode == 13) {
+                $('#btnCreate').click();
+            }
+        });
+
+
+
+        $('#btnCreate').click(function() {
+            // Regex removes all special characters, including whitespace
+            var room = $('#roomName').val().trim().replace(/[^\w\s]/gi, '');
+            if (room != '' && !/[^a-zA-Z0-9]/.test(room)) {
+                window.location.href = '/' + room;
+            }
+            else {
+                $('#roomName').val('').focus();
+                return false;
+            }
+        });
+    });
+</script>
+</body>
+</html>

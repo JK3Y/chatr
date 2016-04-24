@@ -1,0 +1,65 @@
+html, body, .container {
+  height: 100vh;
+  background-color: #EEEEEE; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1vh; }
+
+.ui-dialog-titlebar > button {
+  display: none; }
+
+#left-panel {
+  max-height: 12vh;
+  min-height: 12vh;
+  border-bottom: 1px solid black; }
+
+#user-list li {
+  display: inline; }
+
+#user-list {
+  height: 5vh;
+  overflow-y: auto; }
+
+#right-panel {
+  margin-top: 1vh; }
+
+#messageContainer {
+  min-height: 75vh;
+  max-height: 75vh;
+  margin-bottom: 1vh;
+  overflow-y: auto; }
+
+#message-list li {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px; }
+
+#message-list li:nth-child(even) {
+  background-color: #9fb3de; }
+
+#message-list li:nth-child(odd) {
+  background-color: #FDDCDC; }
+
+@media (min-width: 768px) {
+  #left-panel {
+    min-height: 100vh;
+    max-height: 100vh;
+    border-bottom: 0;
+    border-right: 1px solid black; }
+
+  #user-list {
+    height: inherit; }
+
+  #user-list li {
+    display: block; }
+
+  #right-panel {
+    min-height: 99vh;
+    max-height: 99vh; }
+
+  #messageContainer {
+    min-height: 90vh;
+    max-height: 90vh; } }
+
+/*# sourceMappingURL=style.css.map */

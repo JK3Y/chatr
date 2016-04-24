@@ -1,0 +1,22 @@
+{
+  "name": "chatr",
+  "version": "1.0.0",
+  "description": "Chatr - A disposable chat application",
+  "engines": {
+    "node": "5.11.0",
+    "npm": "3.8.8"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "postinstall": "bower install"
+  },
+  "author": "Jacob Amador",
+  "license": "ISC",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "express": "^4.13.4",
+    "socket.io": "^1.4.5"
+  }
+}
