@@ -14,9 +14,9 @@
 
     <div id="dialog" title="Enter a name">
         <p>Enter a name to join</p>
-        <input type="text" autocomplete="off" placeholder="name" id="name" class="form-control" autofocus>
+        <input type="text" autocomplete="off" placeholder="name" id="name" class="form-control" maxlength="8" autofocus>
+        <center><span id="errormsg"></span></center>
     </div>
-
 
 
     <div class="row" id="chatwindow">
@@ -53,38 +53,57 @@
 <script src="/jquery/dist/jquery.min.js"></script>
 <script src="/jquery-ui/jquery-ui.min.js"></script>
 <script>
+    var socket = io();
     $(document).ready(function() {
-        var socket = io();
+
+        var ready = false;
+        var name = null;
 
         // submit and close name dialog when Enter button is pressed
         $('#name').keyup(function(event) {
+            name = $('#name').val().trim();
+            // check name availability every time a key is released
+            socket.emit('check name', name);
+
+            // submits dialog box when Enter key is pressed
             if (event.keyCode == 13) {
                 $('.ui-dialog-buttonset').find('button').click();
             }
         });
 
+
         // dialog box properties
         $("#dialog").dialog({
-            height: 200,
+            height: 225,
             width: 500,
             resizable: false,
             modal: true,
-            autoOpen: true
+            autoOpen: true,
+            close: function() {
+                $(this).dialog('destroy').remove();
+            }
         });
 
         // initialize dialog box
         $("#dialog").dialog('option', 'buttons', {
             'Join': function() {
-                var name = $('#name').val().trim();
-                if(name != '') {
-                    socket.emit('join chat', name);
-                    ready = true;
-                    $(this).dialog("close");
-                    $('#msg').focus();
-                }
-                else {
-                    $('#name').val('').focus();
-                    return false;
+                $('#errormsg').val('');
+                if (name !== '') {
+                    if (ready) {
+                        socket.emit('join chat', name);
+                        $(this).dialog("close");
+                        $('#msg').focus();
+                    }
+                    else if (ready == false) {
+                        console.log(ready);
+                        $('#errormsg').text('Username is already taken.');
+                        $('#name').val('').focus();
+                        return false;
+                    }
+                    else {
+                        $('#name').val('').focus();
+                        return false;
+                    }
                 }
             }
         });
@@ -93,7 +112,6 @@
         $('#msgForm').submit(function(event) {
             event.preventDefault();
         });
-
 
         // send a message to the server
         $('#msgForm').submit(function () {
@@ -112,20 +130,23 @@
 
 
 
+
         // after the server emits a message, update the message list
         socket.on('get message', function (msg) {
             $('#message-list').append($('<li>').text(msg));
         });
 
-
         // update user list
         socket.on('update users', function(users) {
             $('#user-list').empty();
-
             for(var i = 0; i <= users.length; i++) {
                 $('#user-list').append($('<li>').text(users[i]));
             }
-            console.log(users);
+        });
+
+        // get username availability
+        socket.on('check name result', function(result) {
+            ready = result;
         });
     });
 </script>

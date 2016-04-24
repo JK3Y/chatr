@@ -13,12 +13,12 @@
 
     <div class="jumbotron text-center" id="namewindow">
         <h1 class="display-3">chatr</h1>
-        <p class="lead">quick. disposable. chat.<br />enter a name for your chatroom</p>
+        <p class="lead">quick. disposable. chat.<br />enter a name for your chatroom.</p>
 
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
                 <input type="text" autocomplete="off" placeholder="room name" id="roomName" class="form-control" autofocus><br />
-                <button class="btn btn-success btn-lg" id="btnCreate">Create!</button>
+                <button class="btn btn-success btn-lg" id="btnCreate">create</button>
             </div>
         </div>
     </div>
@@ -39,8 +39,6 @@
                 $('#btnCreate').click();
             }
         });
-
-
 
         $('#btnCreate').click(function() {
             // Regex removes all special characters, including whitespace
