@@ -50,6 +50,14 @@ io.on('connection', function(socket) {
         var available;
         var idx = rooms[room].users.indexOf(name);
 
+        //  ATTEMPTING TO VALIDATE FOR 
+        // DUPLICATE USER NAMES
+        
+        //console.log(rooms[room].users);
+        // console.log(rooms[room].users);
+        // console.log(name);
+        // console.log(idx);
+
         if (name === '') {
             available = null;
         }
@@ -57,7 +65,7 @@ io.on('connection', function(socket) {
         if(idx === -1) {
             available = true;
         }
-        else {
+        else if (idx >= 0) {
             available = false;
         }
         // send back the result after checking the room's users

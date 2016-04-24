@@ -134,6 +134,11 @@
         // after the server emits a message, update the message list
         socket.on('get message', function (msg) {
             $('#message-list').append($('<li>').text(msg));
+
+            // scroll to the bottom when a new message is posted
+            $('#messageContainer').animate({
+                scrollTop: $('#messageContainer').prop("scrollHeight") - $('#messageContainer').height()
+            }, 0);
         });
 
         // update user list
