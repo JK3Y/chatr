@@ -25,6 +25,14 @@ h1, h2, h3, h4, h5, h6 {
   display: inline;
 }
 
+.users:before {
+  content: ' / ';
+}
+
+.users:first-of-type:before, .users:last-of-type:after {
+  content: none;
+}
+
 #user-list {
   height: 5vh;
   overflow-y: auto;
@@ -80,5 +88,9 @@ h1, h2, h3, h4, h5, h6 {
   #messageContainer {
     min-height: 90vh;
     max-height: 90vh;
+  }
+
+  .users:after, .users:before, .users:first-of-type:before, .users:last-of-type:after {
+    content: none;
   }
 }

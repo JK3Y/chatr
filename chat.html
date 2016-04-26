@@ -144,8 +144,8 @@
         // update user list
         socket.on('update users', function(users) {
             $('#user-list').empty();
-            for(var i = 0; i <= users.length; i++) {
-                $('#user-list').append($('<li>').text(users[i]));
+            for(var i = 0; i <= users.length-1; i++) {
+                $('#user-list').append($('<li>').text(users[i]).addClass('users'));
             }
         });
 

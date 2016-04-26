@@ -89,6 +89,7 @@ io.on('connection', function(socket) {
         // tell everybody in the room you've arrived.
         io.to(room).emit('get message', socket.username + ' has joined the chat.');
         io.to(room).emit('update users', rooms[room].users);
+        console.log(rooms[room].users);
     });
 
 
